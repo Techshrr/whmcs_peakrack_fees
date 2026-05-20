@@ -1,8 +1,13 @@
 # PeakRack Gateway Fees for WHMCS
 
-PeakRack Gateway Fees is a WHMCS addon module for configurable payment method fees and country-based gateway allocation.
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-Version: `1.0.0`
+PeakRack Gateway Fees is a WHMCS addon module for configurable payment gateway fees and country-based gateway allocation.
+This directory is the deployable addon folder for WHMCS.
+
+## Current Version
+
+`1.0.1`
 
 ## Compatibility
 
@@ -10,50 +15,63 @@ Version: `1.0.0`
 - PHP 8.3
 - MySQL/MariaDB supported by WHMCS
 
+## Installation
+
+Upload this `peakrack_fees` folder to your WHMCS installation:
+
+```text
+modules/addons/peakrack_fees/
+```
+
+Then open **System Settings > Addon Modules**, activate **PeakRack Gateway Fees**, and configure the addon from **Addons > PeakRack Gateway Fees**.
+
 ## Features
 
 - Adds one managed invoice line item for the selected payment gateway.
-- Supports fixed fees, percentage fees, and gross-up calculation.
-- Supports minimum invoice amount per gateway.
+- Supports fixed fees, percentage fees, minimum invoice amount rules, and gross-up calculation.
+- Refreshes unpaid invoice fees on invoice creation, pre-email generation, gateway changes, admin invoice detail view, and client invoice view.
+- Does not modify paid, cancelled, or refunded invoices.
 - Can mark the fee invoice item as taxable.
 - Can skip tax-exempt clients.
-- Refreshes unpaid invoice fees on invoice creation, gateway change, and invoice view.
-- Hides unavailable gateways on checkout and invoice pages based on billing country.
-- Validates gateway allocation during checkout before the order is created.
-- Shows checkout fee details per gateway.
-- Keeps a recent event log in the addon admin page.
-- Cleans old log rows during the WHMCS daily cron according to configured retention settings.
-- Stores settings in the dedicated `mod_peakrack_fees_*` tables.
+- Supports country-based gateway allocation at checkout.
+- Hides unavailable gateway choices in the client UI and validates the selected gateway server-side during checkout.
+- Shows optional checkout fee details per gateway.
+- Provides English and Chinese admin UI language switching from the header without saving the full settings form.
+- Provides English and Chinese invoice item description templates.
+- Detects Chinese client invoice language from the WHMCS client language/session and uses the Chinese fee description when appropriate.
+- Supports JSON settings import/export.
+- Keeps addon logs with configurable retention and WHMCS daily cron cleanup.
 
-## Package Layout
+## Configuration Summary
 
-Upload this folder to:
+### General Controls
 
-```text
-modules/addons/peakrack_fees
-```
+- **Enable module** controls all fee and allocation behavior.
+- **Mark fee invoice item as taxable** controls the managed invoice item's tax flag.
+- **Skip tax-exempt clients** avoids fees for WHMCS tax-exempt clients.
+- **Show checkout fee details** displays fee details near checkout payment choices.
+- **Refresh fee when invoice is viewed** keeps unpaid invoice totals current.
+- **Enable gateway allocation** enables country-based availability rules.
+- **Validate allocation at checkout** rejects unavailable methods server-side.
+- **Mirror events to WHMCS Activity Log** copies addon log messages into WHMCS Activity Log.
 
-The source package follows the PeakRack underscore style:
+### Gateway Rules
 
-```text
-whmcs_peakrack_fees/peakrack_fees
-```
+Every enabled WHMCS payment gateway appears automatically after this page is refreshed.
+New rules are created with fees disabled by default.
 
-## Installation
+Rule fields include label, enabled fee state, percent, fixed amount, minimum invoice amount, calculation mode, country mode, country list, and checkout notice visibility.
 
-1. Upload `peakrack_fees` to `modules/addons/`.
-2. In WHMCS admin, open `System Settings > Addon Modules`.
-3. Activate `PeakRack Gateway Fees`.
-4. Open `Addons > PeakRack Gateway Fees`.
-5. Enable fee rules for the gateway module names you want to charge.
+Country codes use ISO-3166 alpha-2 values such as `US`, `CA`, `CN`.
 
-## Rule Notes
+### Invoice Descriptions
 
-- `Standard` calculation: `invoice base * percent + fixed`.
-- `Gross-up` calculation: calculates a fee intended to cover percentage processor cost on the final charged amount.
-- Country codes should be ISO-3166 alpha-2 values such as `US`, `CA`, `CN`.
-- `Allow` mode permits only listed countries.
-- `Block` mode hides and rejects listed countries.
+English and Chinese invoice item description templates are stored separately.
+
+Available placeholders:
+
+- `{gateway}`: Gateway label.
+- `{module}`: WHMCS gateway module name.
 
 ## Runtime Hooks
 
@@ -65,8 +83,22 @@ whmcs_peakrack_fees/peakrack_fees
 - `ShoppingCartValidateCheckout`
 - `ShoppingCartCheckoutOutput`
 - `ClientAreaFooterOutput`
+- `DailyCronJob`
 
-## Safety
+## Database Tables
 
-The module only manages invoice items with type `PeakRackGatewayFee`. It removes or updates that managed item while an invoice is unpaid when a selected gateway has no active rule or when a client is tax-exempt and skipping is enabled. Paid, cancelled, and refunded invoices are not modified.
+- `mod_peakrack_fees_settings`
+- `mod_peakrack_fees_logs`
 
+Tables are kept when the addon is deactivated.
+
+## Safety Notes
+
+- The addon only manages invoice items with type `PeakRackGatewayFee`.
+- Paid, cancelled, and refunded invoices are not modified.
+- Test with an unpaid invoice before enabling fees broadly.
+- Keep older development addon folders disabled or removed to avoid duplicate hooks.
+
+## Upgrade Notes
+
+See [UPGRADE.md](UPGRADE.md) for release-by-release upgrade details.

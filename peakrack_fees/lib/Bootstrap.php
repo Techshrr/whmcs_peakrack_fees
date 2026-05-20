@@ -13,7 +13,7 @@ if (!defined('WHMCS')) {
 }
 
 const PRGF_MODULE = 'peakrack_fees';
-const PRGF_VERSION = '1.0.0';
+const PRGF_VERSION = '1.0.1';
 const PRGF_SETTING_KEY = 'config';
 const PRGF_SETTINGS_TABLE = 'mod_peakrack_fees_settings';
 const PRGF_LOGS_TABLE = 'mod_peakrack_fees_logs';

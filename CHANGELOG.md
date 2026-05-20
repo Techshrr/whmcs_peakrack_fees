@@ -1,5 +1,22 @@
 # Changelog
 
+## 1.0.1 - 2026-05-20
+
+Documentation and repository polish release.
+
+### Added
+
+- MIT license file for GitHub license detection.
+- Full English and Simplified Chinese README files at the repository root.
+- Full English and Simplified Chinese upgrade guides at the repository root.
+- Module-local English and Simplified Chinese README and upgrade guides for packaged distributions.
+- Clearer installation, configuration, runtime hook, database table, safety, and development-check documentation.
+
+### Changed
+
+- Addon version bumped to `1.0.1`.
+- GitHub-facing project documentation now follows the same bilingual release structure used by the PeakRack Risk addon.
+
 ## 1.0.0 - 2026-05-20
 
 Initial public release.
