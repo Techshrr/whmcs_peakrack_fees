@@ -1,0 +1,31 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+
+# Local packages and generated archives
+dist/
+dist-commercial/
+build/
+release/
+*.zip
+*.tar
+*.tar.gz
+
+# WHMCS/local secrets and runtime data
+configuration.php
+configuration.php.back
+*.sql
+*.sql.gz
+*.log
+*.cache
+
+# PHP dependency folders should not be needed for this standalone addon.
+vendor/
+
+# Commercial or encoded local-only files
+commercial/
+*.encoded.php
