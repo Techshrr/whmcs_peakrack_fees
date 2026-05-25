@@ -1,83 +1,53 @@
-# PeakRack Gateway Fees Upgrade Notes
+# Upgrade Guide
 
-## 1.0.1
+This guide explains how to upgrade this module from an older version.
 
-Documentation and repository polish release for WHMCS 9.x / PHP 8.3.
+## Before upgrading
 
-### Added
+1. Back up the WHMCS files.
+2. Back up the WHMCS database.
+3. Make a copy of `modules/addons/peakrack_fees/`.
+4. Review [CHANGELOG.md](CHANGELOG.md).
+5. Check whether the upgrade includes database changes.
 
-- Repository-level MIT `LICENSE`.
-- Full English and Simplified Chinese README files.
-- Full English and Simplified Chinese upgrade guides.
-- Module-local README and upgrade guide files for packaged distributions.
-- Clearer documentation for gateway rules, country allocation, runtime hooks, database tables, and safety notes.
+## Upgrade steps
 
-### Changed
+1. Download the latest release from the official repository:
 
-- Addon version bumped to `1.0.1`.
-- GitHub repository metadata should use the `whmcs`, `peakrack`, and `payment-gateway` topics and the PeakRack homepage.
+   https://github.com/Techshrr/whmcs_peakrack_fees
 
-### Upgrade Notes
+2. Replace the addon files in:
 
-- Existing WHMCS installs do not require database changes for this release.
-- Copy the updated `peakrack_fees/` directory over `modules/addons/peakrack_fees/`.
-- Open **System Settings > Addon Modules** and confirm the addon version shows `1.0.1`.
-- Review the new documentation before distributing the package to customers.
+   `modules/addons/peakrack_fees/`
 
-## 1.0.0
+3. Keep existing WHMCS module settings.
+4. Log in to the WHMCS admin area.
+5. Open **Addons > PeakRack Gateway Fees** and verify all options and gateway rules.
+6. Clear the WHMCS template cache if invoice or checkout output does not update.
 
-Initial public release.
+## Database migrations
 
-### Added
+This version does not require manual database migration.
 
-- WHMCS addon module `peakrack_fees`.
-- Configurable payment gateway fee rules.
-- Fixed fee, percentage fee, minimum invoice amount, and gross-up calculation modes.
-- Managed invoice item type `PeakRackGatewayFee`.
-- Invoice fee refresh on invoice creation, pre-email generation, gateway changes, admin invoice detail view, and client invoice view.
-- Checkout country-based gateway allocation with client-side hiding and server-side validation.
-- English and Chinese admin UI language switching from the header.
-- English and Chinese invoice item description templates.
-- JSON import/export for normalized addon settings.
-- Module log table with retention settings and WHMCS daily cron cleanup.
-- GitHub Actions workflow for PHP syntax checks.
+The addon creates its settings and log tables during activation or admin access.
 
-### Hardened
+## Version-specific notes
 
-- Invoice totals load WHMCS invoice helpers before calling `updateInvoiceTotal()`.
-- Managed invoice item due dates follow the invoice due date.
-- Frontend gateway allocation reselects an allowed gateway if the current selection becomes unavailable.
-- Paid, cancelled, and refunded invoices are not modified.
+### Upgrade from 1.0.0 to 1.0.1
 
-### Upgrade Notes
+- No breaking changes.
+- Existing settings are preserved.
+- No manual database changes are required.
 
-- This release uses the final module name:
+## Rollback
 
-  ```text
-  peakrack_fees
-  ```
+To roll back:
 
-- The final WHMCS addon path is:
+1. Restore the previous `modules/addons/peakrack_fees/` directory.
+2. Restore the database backup if the upgrade changed module tables.
+3. Clear the WHMCS template cache.
+4. Check the WHMCS activity log and module logs for errors.
 
-  ```text
-  modules/addons/peakrack_fees
-  ```
+## Notes
 
-- The final database tables are:
-
-  ```text
-  mod_peakrack_fees_settings
-  mod_peakrack_fees_logs
-  ```
-
-- If an older development build was installed under `modules/addons/peakrack_gateway_fees`, deactivate and remove that old folder before activating `peakrack_fees`.
-- This release intentionally does not migrate old development-table data from `mod_peakrack_gateway_fees_*`.
-
-## Standard Manual Upgrade
-
-1. Back up your WHMCS database.
-2. Upload the new `peakrack_fees` folder to `modules/addons/peakrack_fees`.
-3. Replace all existing files in that folder.
-4. Open **System Settings > Addon Modules** and confirm the module is active.
-5. Open **Addons > PeakRack Gateway Fees** and review settings.
-6. Test with an unpaid invoice before enabling fees broadly.
+Do not overwrite production credentials, local configuration files, custom templates, callback secrets, or payment credentials unless the upgrade notes explicitly require it.

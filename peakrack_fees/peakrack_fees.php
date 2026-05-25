@@ -1,9 +1,15 @@
 <?php
+// SPDX-License-Identifier: Apache-2.0
 
 /**
- * PeakRack Gateway Fees addon module for WHMCS.
+ * PeakRack Gateway Fees for WHMCS
  *
- * Target runtime: WHMCS 9.x / PHP 8.3.
+ * Official repository:
+ * https://github.com/Techshrr/whmcs_peakrack_fees
+ *
+ * Copyright 2026 PeakRack.
+ * Licensed under the Apache License, Version 2.0.
+ * See the LICENSE and NOTICE files for details.
  */
 
 if (!defined('WHMCS')) {

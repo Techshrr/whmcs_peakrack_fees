@@ -1,7 +1,15 @@
 <?php
+// SPDX-License-Identifier: Apache-2.0
 
 /**
- * Runtime hooks for PeakRack Gateway Fees.
+ * PeakRack Gateway Fees for WHMCS
+ *
+ * Official repository:
+ * https://github.com/Techshrr/whmcs_peakrack_fees
+ *
+ * Copyright 2026 PeakRack.
+ * Licensed under the Apache License, Version 2.0.
+ * See the LICENSE and NOTICE files for details.
  */
 
 if (!defined('WHMCS')) {

@@ -1,25 +1,33 @@
 # Security Policy
 
-## Supported Versions
+## Reporting a vulnerability
+
+Please do not open public GitHub issues for security vulnerabilities.
+
+Report security issues to:
+
+security@peakrack.com
+
+Please include:
+
+- Affected project and version
+- Description of the issue
+- Steps to reproduce
+- Potential impact
+- Suggested mitigation, if available
+
+## Supported versions
 
 | Version | Supported |
-| --- | --- |
-| 1.0.x | Yes |
+|---|---|
+| 1.x | Yes |
+| < 1.0 | No |
 
-## Reporting Security Issues
+## Sensitive data
 
-Report security issues privately to the repository owner instead of opening a public issue with exploit details.
+Do not include real customer data, production API keys, payment secrets, database credentials, WHMCS license information, identity documents, private signing keys, or server passwords in reports.
+## Public issues
 
-## Release Safety
+General bugs and feature requests may be submitted through GitHub Issues.
 
-Do not commit:
-
-- WHMCS `configuration.php`
-- database dumps
-- customer data
-- API keys
-- licensing secrets
-- encoded commercial helper source with readable secrets
-- ZIP packages that contain credentials
-
-The public package contains source code for the addon only.
+Security vulnerabilities must be reported privately by email.

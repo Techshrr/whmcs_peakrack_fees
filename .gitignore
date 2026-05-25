@@ -1,31 +1,47 @@
-# OS and editor files
-.DS_Store
-Thumbs.db
-*.swp
-*.swo
+# Environment files
+.env
+.env.*
+!.env.example
+
+# Composer
+/vendor/
+
+# IDE
 .idea/
 .vscode/
+*.sublime-project
+*.sublime-workspace
 
-# Local packages and generated archives
-dist/
-dist-commercial/
-build/
-release/
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs/
+storage/logs/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*.old
+
+# Local packages
+/dist/
+/dist-commercial/
+/build/
+/release/
 *.zip
 *.tar
 *.tar.gz
 
-# WHMCS/local secrets and runtime data
+# WHMCS sensitive/runtime files
 configuration.php
 configuration.php.back
+attachments/
+downloads/
+templates_c/
+crons/
 *.sql
 *.sql.gz
-*.log
-*.cache
-
-# PHP dependency folders should not be needed for this standalone addon.
-vendor/
-
-# Commercial or encoded local-only files
-commercial/
-*.encoded.php
