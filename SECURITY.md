@@ -4,16 +4,16 @@
 
 Please do not open public GitHub issues for security vulnerabilities.
 
-Report security issues to:
+Report issues involving fee calculation, gateway-allocation enforcement, invoice item updates, or checkout validation to:
 
 security@peakrack.com
 
 Please include:
 
-- Affected project and version
-- Description of the issue
-- Steps to reproduce
-- Potential impact
+- Affected addon version, WHMCS version, and PHP version
+- Whether the issue affects invoice refresh, checkout gateway selection, tax handling, or admin import/export
+- Description of the issue and reproduction steps
+- Potential impact on invoice totals or payment-gateway availability
 - Suggested mitigation, if available
 
 ## Supported versions
@@ -25,9 +25,10 @@ Please include:
 
 ## Sensitive data
 
-Do not include real customer data, production API keys, payment secrets, database credentials, WHMCS license information, identity documents, private signing keys, or server passwords in reports.
+Do not include production gateway fee rules, country-allocation policies, customer billing countries tied to real accounts, invoice IDs, transaction IDs, WHMCS license data, gateway credentials, or server logs containing customer identifiers.
+
 ## Public issues
 
-General bugs and feature requests may be submitted through GitHub Issues.
+Installation problems, calculation edge cases using sample data, and documentation fixes may be submitted through GitHub Issues.
 
 Security vulnerabilities must be reported privately by email.

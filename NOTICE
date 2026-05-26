@@ -4,5 +4,7 @@ Copyright 2026 PeakRack
 Official repository:
 https://github.com/Techshrr/whmcs_peakrack_fees
 
+This package contains a WHMCS addon for configurable gateway fee invoice items and country-based gateway allocation.
+
 Licensed under the Apache License, Version 2.0.
 See the LICENSE file for details.
